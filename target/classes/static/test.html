@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>admin的词典</title>
+		<link rel="stylesheet" href="css/dict.css" />
+	</head>
+	<body  background="./img/cat.jpeg" style="background-repeat: no-repeat;background-size: 100% 100%">
+		<div class="wrapper">
+			<div class="first-line">
+				<a class="first-line-back" style="background-color: #22222240;" href="index.html">返回首页</a>
+				<button class="first-line-createdirt" onclick="toPage('./homepage.html')">删除词典</button>
+			</div>
+			<div class="second-line">
+				<div class="second-line-admin" >
+					<div class="second-line-admin-pic" style="background: url(img/1234.jpeg);background-size: cover; " onclick="toPage('./homepage.html')"></div>
+					<p class="second-line-admin-name">admin</p>
+
+				</div>
+				<!-- <div class="second-line-load">
+					<div class="second-line-load-1">我的词典</div>
+					<button class="second-line-load-up" style="background-color: #22222240;">词典A</button>
+					<button class="second-line-load-up" style="background-color: #22222240;">词典B</button>
+					<button class="second-line-load-up" style="background-color: #22222240;">词典C</button>
+					
+				</div> -->
+			</div>
+			<div class="message">
+				<a class="message-selfpage" style="background-color: #22222240; margin-left:5rem;" href="homepage.html">个人主页</a>
+				<a class="message-selfpage" style="background-color: #22222240; margin-left: 12rem;" href="index.html">所有词典</a>
+				<a class="message-selfpage" style="background-color: #22222240; margin-left: 10rem;" href="dict.html">查找模式</a>
+			</div>
+			<div class ="book">
+				<div class="book-wrapper" id="sheet-words">
+					<div class="words-input">
+					    <p class="words-input-new">添加词汇</p>
+					    <input type="text" class="words-input-english" placeholder="输入单词或词组"/>
+					    <input type="text" class="words-input-short" placeholder="输入缩写"/>
+					    <input type="text" class="words-input-china" placeholder="输入单词释义"/>
+					</div>
+					<p style="width: 100%; height: .2rem; background: rgb(18, 0, 121);"></p>
+				</div>
+				
+				<!-- <div class="book-info">您的账户注册于2021年4月24日,电话号码为：1XXXXXXXXXX</div>
+				<div class="book-info-wrapper">
+					<span class="book-line">修改昵称</span>
+					<input type="text" class="book-infochange" placeholder="请输入新的昵称">
+					<br>
+					<span class="book-line">修改密码</span>
+					<input type="text" class="book-infochange" placeholder="请输入新的密码">
+					<br>
+					<span class="book-line">确认密码</span>
+					<input type="text" class="book-infochange" placeholder="请确认您的密码">
+				</div> -->
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	
+	function toPage(href){
+		document.location.href = href;
+	}
+</script>
+<script src="jquery-3.5.1.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $("input").focus(function(){
+            this.select();
+        })
+
+        var index_num = 0;
+
+        var words_new = function(english="暂无单词或词组", short="暂无缩写", china="暂无单词释义"){
+            
+            var div = document.createElement("div");
+            div.setAttribute("class", "words-output");
+            div.setAttribute("id", "sheet" + index_num);
+
+            var p1 = document.createElement("p");
+            p1.setAttribute("class", "words-output-english");
+            p1.innerHTML = english;
+
+            var p2 = document.createElement("p");
+            p2.setAttribute("class", "words-output-short");
+            p2.innerHTML = short;
+            
+            var p3 = document.createElement("p");
+            p3.setAttribute("class", "words-output-china");
+            p3.innerHTML = china;
+
+            var p0 = document.createElement("p");
+            p0.setAttribute("class", "words-output-delete");
+            p0.setAttribute("id", index_num++);
+            p0.innerHTML = "删除";
+
+            div.append(p0);
+            div.append(p1);
+            div.append(p2);
+            div.append(p3);
+            console.log(index_num);
+
+            $("#sheet-words").append(div);
+        }
+
+        $("#btn").click(function(){
+            words_new();
+        })
+
+        $(".words-input-new").click(function(){
+            
+            var english = $(".words-input-english").val()
+            var short = $(".words-input-short").val()
+            var china = $(".words-input-china").val()
+
+            if(english == "输入单词或词组" || english == "") english = "暂无单词或词组";
+            if(short == "输入缩写" || short == "") short = "暂无缩写";
+            if(china == "输入单词释义" || china == "") china = "暂无单词释义";
+
+            words_new(english, short, china);
+        })
+
+        $("#sheet-words").on('click','.words-output-delete',function(e){
+            console.log(e.target.id);
+            $("#sheet"+e.target.id).hide();
+        })
+    })
+</script>

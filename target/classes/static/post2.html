@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>网页测试</title>
+    <script type="text/javascript" src="jquery-3.5.1.js"></script>
+    <style type="text/css">
+        .words{
+            background-color: rgb(86, 179, 255);
+        }
+
+        .words-input,
+        .words-output{
+            display: flex;
+            top: 0;
+            padding-left: 1rem;
+            margin-top: 1rem;
+            background-color: rgb(47, 144, 223);
+        }
+
+        .words-input-english,
+        .words-input-short,
+        .words-input-china{
+            overflow:hidden;
+            white-space:nowrap;
+
+            display: inline-block;
+            margin: 1rem;
+            margin-left: 3rem;
+            padding-left: .4rem;
+            padding-right: .4rem;
+            width: 15rem;
+            background-color: #6fff7b;
+        }
+        .words-input-short{
+            width: 5rem;
+        }
+        .words-input-china{
+            width: 17rem;
+        }
+
+        /* .words-input-english :-ms-input-placeholder{
+            color: #000000;
+            font-size: 27px;
+        } */
+
+
+        .words-input-new,
+        .words-output-delete{
+            display: block;
+            box-sizing: border-box;
+            border: 1px solid;
+            border-color: black;
+            padding-left: 0.5rem;
+            padding-right: 0.4rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.5rem;
+            background-color: #a0ffe7;
+            cursor:pointer;
+            transition: all 0.3s;
+        }
+
+        .words-output-delete{
+            padding-left: 1.5rem;
+            padding-right: 1.4rem;
+        }
+
+        .words-input-new:hover ,
+        .words-output-delete:hover {
+            transform: translate(0, -0.5rem);
+            box-shadow: 0rem 0rem 1.8rem rgb(255, 219, 206);
+        }
+
+        .words-output-english,
+        .words-output-short,
+        .words-output-china{
+            /* 多余字符省略号 */
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            -webkit-text-overflow:ellipsis;
+
+            display: inline-block;
+            margin: 1.1875rem;
+            margin-left: 3rem;
+            padding-left: 0.5rem;
+            padding-right: 0.4rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.5rem;
+            width: 15rem;
+            text-align: center;
+            background-color: #6fff7b;
+        }
+        .words-output-short{
+            width: 5rem;
+        }
+        .words-output-china{
+            width: 17rem;
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+    <div>
+        <p>网页内容标题</p>
+    </div>
+    <ul id="test"></ul>
+
+    <button id="btn" style="margin-left:3.5rem">添加</button>
+
+    <div class="words" id="sheet-words">
+        <div class="words-input">
+            <p class="words-input-new">添加词汇</p>
+            <input type="text" class="words-input-english" value="输入单词或词组"/>
+            <input type="text" class="words-input-short" value="输入缩写"/>
+            <input type="text" class="words-input-china" value="输入单词释义"/>
+        </div>
+        <p style="width: 100%; height: .2rem; background: rgb(18, 0, 121);"></p>
+    </div>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+
+        $("input").focus(function(){
+            this.select();
+        })
+
+        var index_num = 0;
+
+        var words_new = function(english="暂无单词或词组", short="暂无缩写", china="暂无单词释义"){
+            
+            var div = document.createElement("div");
+            div.setAttribute("class", "words-output");
+            div.setAttribute("id", "sheet" + index_num);
+
+            var p1 = document.createElement("p");
+            p1.setAttribute("class", "words-output-english");
+            p1.innerHTML = english;
+
+            var p2 = document.createElement("p");
+            p2.setAttribute("class", "words-output-short");
+            p2.innerHTML = short;
+            
+            var p3 = document.createElement("p");
+            p3.setAttribute("class", "words-output-china");
+            p3.innerHTML = china;
+
+            var p0 = document.createElement("p");
+            p0.setAttribute("class", "words-output-delete");
+            p0.setAttribute("id", index_num++);
+            p0.innerHTML = "删除";
+
+            div.append(p0);
+            div.append(p1);
+            div.append(p2);
+            div.append(p3);
+            console.log(index_num);
+
+            $("#sheet-words").append(div);
+        }
+
+        $("#btn").click(function(){
+            words_new();
+        })
+
+        $(".words-input-new").click(function(){
+            
+            var english = $(".words-input-english").val()
+            var short = $(".words-input-short").val()
+            var china = $(".words-input-china").val()
+
+            if(english == "输入单词或词组" || english == "") english = "暂无单词或词组";
+            if(short == "输入缩写" || short == "") short = "暂无缩写";
+            if(china == "输入单词释义" || china == "") china = "暂无单词释义";
+
+            words_new(english, short, china);
+        })
+
+        $("#sheet-words").on('click','.words-output-delete',function(e){
+            console.log(e.target.id);
+            $("#sheet"+e.target.id).hide();
+        })
+    })
+</script>

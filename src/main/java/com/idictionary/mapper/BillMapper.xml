@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.idictionary.mapper.BillMapper">
+	
+	<resultMap type="bill" id="billSimple">
+		<id property="id" column="b_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="wordCount" column="word_count"/>
+		<result property="name" column="name"/>
+		<result property="introduction" column="introduction"/>
+		<result property="isPrivate" column="is_private"/>
+	</resultMap>
+	
+	<resultMap type="bill" id="billWithWords">
+		<id property="id" column="b_b_id"/>
+		<result property="createTime" column="b_create_time"/>
+		<result property="wordCount" column="b_word_count"/>
+		<result property="name" column="b_name"/>
+		<result property="introduction" column="b_introduction"/>
+		<result property="isPrivate" column="b_is_private" javaType="boolean"/>
+		<collection property="words" javaType="list" ofType="word" columnPrefix="w_">
+			<id property="id" column="w_id"/>
+			<result property="eng" column="eng"/>
+			<result property="cn" column="cn"/>
+			<result property="shrt" column="short"/>
+			<result property="createTime" column="create_time"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="bill" id="billWithUser">
+		<id property="id" column="b_id"/>
+		<result property="wordCount" column="word_count"/>
+		<result property="name" column="name"/>
+		<result property="introduction" column="introduction"/>
+		<association property="user" javaType="user">
+			<result property="nickname" column="nickname"/>
+		</association>
+	</resultMap>
+	
+	<select id="countPublic" resultType="int">
+		select
+			count(*)
+		from
+			bill b
+			NATURAL JOIN user u
+		<where>
+			<if test="name != '' and name != null">
+				AND
+				b.name like '%${name}%'
+			</if>
+			
+			<if test="user != '' and user != null">
+				AND 
+				u.nickname like '%${user}%'
+			</if>
+			AND
+			is_private = 'false'
+		</where>
+		
+	</select>
+	
+	<select id="getList" resultMap="billWithUser">
+		select
+			*
+		from
+			bill b
+			NATURAL JOIN user u
+		<where>
+			<if test="name != '' and name != null">
+				AND
+				b.name like '%${name}%'
+			</if>
+			
+			<if test="user != '' and user != null">
+				AND
+				u.nickname like '%${user}%'
+			</if>
+			
+			AND
+			is_private = 'false'
+		</where>
+		order by
+			create_time desc
+		limit 
+			${begin},${length}
+	</select>
+	
+	<select id="getListByUser" resultMap="billSimple">
+		select
+			*
+		from
+			bill
+		where
+			u_id = #{uId}
+	</select>
+	
+	<select id="getWithWords" resultMap="billWithWords">
+		select
+			b.b_id 			as b_b_id,
+			b.name			as b_name,
+			b.introduction	as b_introduction,
+			b.word_count	as b_word_count,
+			b.create_time	as b_create_time,
+			b.is_private	as b_is_private,
+			w.eng			as w_eng,
+			w.cn			as w_cn,
+			w.short			as w_short,
+			w.create_time	as w_create_time,
+			w.w_id			as w_w_id
+		from
+			bill b
+			LEFT JOIN words w on w.b_id = b.b_id
+		where
+			b.b_id = #{bId}
+		order by
+			w.create_time desc
+	</select>
+	
+	<select id="countByUser" resultType="int">
+		select
+			count(*)
+		from
+			bill
+		where
+			b_id = #{bId}
+			and
+			u_id = #{uId}
+	</select>
+	
+	<select id="countPublicById" resultType="int">
+		select
+			count(*)
+		from
+			bill
+		where
+			b_id = #{id}
+			and
+			is_private = 'false'
+	</select>
+	
+	<update id="updateInfo">
+		update
+			bill
+		set
+			name = #{bill.name},
+			introduction = #{bill.introduction}
+	</update>
+	
+	<update id="addWord">
+		update
+			bill
+		set
+			word_count = word_count + 1
+		where
+			b_id = #{bId}
+	</update>
+	
+	<update id="deleteWord">
+		update
+			bill
+		set
+			word_count = word_count - 1
+		where
+			b_id = #{bId}
+	</update>
+
+	<insert id="add">
+		insert into
+			bill(
+				name,
+				introduction,
+				word_count,
+				create_time,
+				u_id
+			)
+		value(
+			#{bill.name},
+			#{bill.introduction},
+			0,
+			#{bill.createTime},
+			#{bill.uId}
+		)
+		<selectKey keyProperty="bill.id" order="AFTER" resultType="java.lang.String">
+			select
+				LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="delete">
+		delete from 
+			bill
+		where
+			b_id = #{bId}
+	</delete>
+
+	<update id="privateSwitch">
+		update 
+			bill
+		set
+			is_private = 
+			<if test="private == 0">
+				'false'
+			</if>
+			<if test="private == 1">
+				'true'
+			</if>
+		where
+			b_id = #{bId}
+	</update>	
+	
+	<update id="update">
+		update
+			bill
+		set
+			name = #{name},
+			introduction = #{introduction}
+		where
+			b_id = #{id}
+	</update>
+	
+</mapper>

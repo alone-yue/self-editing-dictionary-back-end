@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>idictionary</title>
+		<link rel="stylesheet" href="css/home.css" />
+		<link rel="icon" href="img/猫爪.png">
+	</head>
+	<body  background="./img/cat.jpeg" style="background-repeat: no-repeat;background-size: 100% 100%">
+		
+		<div class="hmask" style="display: none;">
+			<div class="hmask-confirm">
+				<div class="cross">
+					X
+				</div>
+				<div class="tips tips-help">
+					<p>网页帮助：本网页是一个在线的单词查询以及积累平台，具有查询单词，构建词典（即积累单词），以及与他人互享词典等功能。在基于日常生活常用单词的范围与频率下，通过满足对日常单词的查询，积累的需求，实现对日常单词的巩固积累，从而提高自身特定语境下的英语交流能力，从而满足日常生活的需求。
+						本王网页由宣传界面，登录、注册界面，词典界面，以及个人主页构成。下面将对其涉及理念及功能进行说明：</p>
+					<p>一，注册，登录界面</p>
+					<p>1．页面说明</p>
+						<p>（1）登录，注册界面分别完成用户的登录，注册功能，同时支持对分享词典的阅读查看</p>
+					<p>2．页面帮助</p>
+						<p>（1）登录：登录时按照提示，输入已注册用户正确的的电话，密码，点击登录即可，登录后跳转词典界面，若为注册本账户，可通过注册页先完成注册</p>
+						<p>（2）注册：注册时，按照提示，输入电话，昵称，密码，并确认密码，即可完成注册。</p>
+					<p>二，词典界面</p>
+					<p>1．页面说明</p>
+						<p>（1）词典界面即网页的主页面，可以在此检索词典，查看他人的词典，同时，也有机会中此看到自己的分享的词典。</p>
+					<p>2．页面帮助</p>
+						<p>（1）词典检索：本词典主要支持通过词典名称，作者名称以及二者结合的方式进行检索</p>
+						<p>（2）词典查看：通过点击词典主体实现对词典的查看。</p>
+					<p>三，个人主页</p>
+						<p>1．页面说明</p>
+						<p>（1）个人主页主要包括个人资料，我的词典，以及新建词典三个板块</p>
+						<p>2．页面帮助</p>
+						<p>（1）个人资料：通过点击个人资料进入个人资料页面，可以查看个人资料。通过页面下方的修改按钮，还能实现对个人资料的修改</p>
+						<p>（2）我的词典：通过点击我的词典进入我的词典页面，我的词典页面收藏了所有自己创建的词典，可以通过点击词典主体对词典进行浏览，点击下方的删除实现对词典的删除。</p>
+						<p>（3）新建词典：通过点击新建词典进入新建词典页面，按照提示，输入词典名字，词典继承，点击页面下方的新建词典按钮即可实现词典的建立。</p>
+					<p>--附：本网页由：李唯聪，陈哲楷，刘俊宏，陈园共同完成。由于时间匆忙，网页尚有很多不足的地方，欢迎各位发现反馈，予以指正。</p>
+				</div>
+				<button class="submit submit-help">确认</button>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<div class="first-line">
+				<a class="first-line-back" style="background:url(img/logo.png) no-repeat;background-size: 70%;border-bottom: 1px solid;background-position: 1.5rem 1rem;"  href="index.html"></a>
+				
+				<div class="first-line-options">
+					<button class="first-line-option option-all">所有词典</button>
+					<button class="first-line-option option-help">词典帮助</button>
+					<div class="option-space"></div>
+					<div class="option-space"></div>
+					<div class="option-space"></div>
+					<div class="option-space"></div>
+					<button class="first-line-option option-logout">退出登录</button>
+				</div>
+				
+			</div>
+			<div class="second-line">
+				<!-- 第二列用户信息 -->
+				<div class="second-line-admin" >
+					<div class="second-line-admin-pic"></div>
+					<p class="second-line-admin-name"></p>
+				</div>
+				
+                <!-- 第二列表单信息 --> 
+                <div class = "choice-sheet">
+                    <div class = "choice-sheet-choices">
+                        <button class="choice-sheet-choice self-message" id="choice1">个人资料</button>
+                        <button class="choice-sheet-choice self-dirt" id="choice2">我的辞典</button>
+                        <button class="choice-sheet-choice create-dirt" id="choice3">创建辞典</button>
+                    </div>
+                </div>
+				
+			</div>
+			<div class="message">
+				<div class="message-title">
+					<h2 class="message-title-content">《实用工具-自编辑辞典v1.0》</h2>
+					<h4 class="message-title-content">--吉林大学2119级网页设计小组LCLC开发--</h4>
+				</div>
+			</div>
+            
+
+
+            <div class ="book01 book">
+				<div class = "book2-space"></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-infor">该用户注册于</div>
+				<div class = "book2-const-infor book2-registertime"></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-infor">手机号</div>
+				<div class = "book2-const-infor book2-phone" ></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-infor">用户名</div>
+				<div class = "book2-const-infor book2-nickname"></div>
+				<button class = "book2-option" id="choice-change">修改</button>
+			</div>
+
+			<div class = "book012 book">
+				
+				<div class = "book2-infor">该用户注册于</div>
+				<div class = "book2-const-infor book2-registertime"></div>
+				
+				<div class = "book2-space"></div>
+				
+				<div class = "book2-infor">手机号</div>
+				<div class = "book2-const-infor book2-phone" ></div>
+				
+				<div class = "book2-space"></div>
+				
+				<div class = "book2-infor">用户名</div>
+				<input class = "book2-self-infor book2-self-nickname">
+				
+				<div class = "book2-space"></div>
+				
+				<div class = "book2-infor">密码</div>
+				<input class = "book2-self-infor book2-self-password" placeholder="请输入密码,为空则不修改">
+				
+				<div class = "book2-space"></div>
+				
+				<div class = "book2-infor">重复密码</div>
+				<input class = "book2-self-infor book2-self-password-rpt" placeholder="请确认密码">
+				
+				<div class = "book2-space"></div>
+				
+				<table border="0" class="book2-self-icon">
+					<tr>
+						<td width="10%">
+							<div class="icon"></div>
+						</td>
+						<td width="12%"><button class="switch">随机</button></td>
+						<td class="palette" align="center">
+							<span>R</span><input type="number" class="r" min="0" max="255" placeholder="R"><br>
+							<span>G</span><input type="number" class="g" min="0" max="255" placeholder="G"><br>
+							<span>B</span><input type="number" class="b" min="0" max="255" placeholder="B">
+						</td>
+					</tr>
+
+				</table>
+
+				
+				
+				<button class = "book2-option" id="choice-change2">确认修改</button>
+				<button class = "book2-option2" id="choice-change3">取消修改</button>
+			</div>
+
+			<!-- 用户词典 -->
+			<div class= "book02 book" >
+				<div class="book02-list-wrapper">
+					<!-- <div class="book02-list-node">
+						
+						<table>
+							<tr>
+								<td colspan="2" height="15%" class="name">计算机网络基础</td>
+							</tr>
+							<tr>
+								<td colspan="2" height="50%" class="introduction">汇总计算机网络课程基础词汇</td>
+							</tr>
+							<tr>
+								<td class="time">2021-04-05</td>
+								<td rowspan="2" width="30%" class="wordcount">53</td>
+							</tr>
+							<tr>
+								<td class="private">未公开</td>
+							</tr>
+						</table>
+						
+					</div> -->
+				</div>
+				
+				<h3 class="book02-list-count"></h3>
+			</div>
+
+			<div class= " book03 book" >
+				<div class = "book2-space"></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-space"></div>
+				<div class = "book2-infor">词典名</div>
+				<input class = "book2-self-infor book2-self-name" placeholder="词典名称">
+				<div class = "book2-space"></div>
+				<div class = "book2-infor">词典简介</div>
+				<textarea class="book2-self-infor book2-self-introduction" placeholder="简单向词友介绍介绍吧"></textarea>
+				<div class = "book2-space"></div>
+				<div class = "book2-space"></div>
+				<button class = "book2-option book2-option-new">新建词典</button>
+			</div>
+
+		</div>
+	</body>
+</html>
+<script src="jquery-3.5.1.js"></script>
+<script src="commen.js"></script>
+<script>
+	
+	var user;
+	
+	var billList;
+	
+	$('.option-all').click(function(){
+		location.href = 'index.html';
+	})
+	
+	$('.option-logout').click(logout);
+	
+	//用户登出
+	function logout(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/logout',
+			type:'get',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			success:function(res){
+				if(res.code == 200){
+					alert('注销成功')
+					sessionStorage.removeItem('token');
+					location.href = 'index.html';
+				}else{
+					alert(res.message)
+				}
+			}
+		})
+	}
+	
+	//新建词典事件
+	$('.book2-option-new').click(function(){
+		if(!confirm('确认创建词典？')){
+			return;
+		}
+		let name = $('.book2-self-name').val();
+		let introduction = $('.book2-self-introduction').val();
+		
+		$.ajax({
+			url:'http://60.205.211.19:2119/bill/add',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			data:{
+				name:name,
+				introduction:introduction
+			},
+			success:function(res){
+				console.log(res);
+				if(res.code == 200){
+					alert('创建成功!!');
+					location.href='edit.html?bId=' + res.data.id;
+				}else{
+					alert('创建失败:' + res.message);
+				}
+			}
+		})
+	})
+	
+	//展示用户词典
+	function displayBillList(){
+		
+		$('.book02-list-count').text('共有词典 ' + billList.length + ' 本');
+		
+		let wrapper = $('.book02-list-wrapper');
+		wrapper.empty();
+		for(let i = 0;i < billList.length;i++){
+			let bill = billList[i];
+			console.log(bill);
+			let node = $('<div class="book02-list-node"></div>').attr('id','bill-node-' + bill.id);
+			let table = $('<table></table');
+			
+			let tr = $('<tr></tr>');
+			tr.append($('<td colspan="2" height="15%" class="name"></td>').text(bill.name));
+			table.append(tr);
+			
+			tr = $('<tr></tr>');
+			tr.append($('<td colspan="2" height="50%" class="introduction"></td>').text(bill.introduction));
+			table.append(tr);
+			
+			tr = $('<tr></tr>');
+			tr.append($('<td class="time"></td>').text(bill.createTime.split(' ')[0]))
+				.append($('<td rowspan="2" width="30%" class="wordcount"></td>').text(bill.wordCount));
+			table.append(tr);
+			
+			tr = $('<tr></tr>');
+			tr.append($('<td class="private"></td>').text(bill.private ? '未公开' : '已公开'));
+			table.append(tr);
+			
+			node.append(table);
+			wrapper.append(node);
+		}
+		
+		//处理点击词典事件
+		$('.book02-list-node').click(function(){
+			let id = $(this).attr('id').split('-')[2];
+			location.href='edit.html?bId=' + id;
+		})
+		
+	}
+	
+    $(document).ready(function(){
+		$(".book012").hide();
+		$(".book02").hide();
+		$(".book03").hide();
+		
+		//校验用户信息
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/loginInfo',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			async:false,
+			success:function(res){
+				console.log(res);
+				if(res.code == 200){
+					$('title').text(res.data.nickname + ' 的主页');
+					$('.second-line-admin-name').text(res.data.nickname);
+					$('.option-homepage').show();
+					$('.option-logout').show();
+					$('.second-line-admin-pic').css('background-color','rgb(' + res.data.icon + ')');
+					user = res.data;
+				}else{
+					alert('请先登录');
+					// location.href='./index.html';
+				}
+			}
+		})
+		
+		//获取用户词典
+		$.ajax({
+			url:'http://60.205.211.19:2119/bill/getListByUser',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			async:false,
+			success:function(res){
+				console.log(res);
+				if(res.code == 200){
+					billList = res.data;
+					displayBillList()
+				}else{
+					
+				}
+			}
+		})
+		
+		$('#choice1').click();
+    })
+
+	var hides = function(){
+		$(".book01").hide();
+		$(".book012").hide();
+		$(".book02").hide();
+		$(".book03").hide();
+	}
+
+	//个人资料点击
+	$("#choice1").click(function(){
+		hides();
+		//填写用户信息
+		$('.book2-registertime').text(user.registerTime);
+		$('.book2-nickname').text(user.nickname);
+		$('.book2-phone').text(user.phone);
+		$(".book01").show();
+	})
+
+	//我的词典点击
+	$("#choice2").click(function(){
+		hides();
+		$(".book02").show();
+	})
+
+	//创建词典点击
+	$("#choice3").click(function(){
+		hides();
+		$(".book03").show();
+	})
+
+	//个人资料修改点击
+	$("#choice-change").click(function(){
+		hides();
+		$('.book2-self-nickname').val(user.nickname);
+		$('.book2-self-phone').val(user.phone);
+		$('.book2-self-icon .icon').css('background-color','rgb(' + user.icon + ')');
+		$('.book2-self-icon .r').val(user.icon.split(',')[0]);
+		$('.book2-self-icon .g').val(user.icon.split(',')[1]);
+		$('.book2-self-icon .b').val(user.icon.split(',')[2]);
+		$(".book012").show();
+	})
+	
+	//随机头像点击
+	$('.book2-self-icon .switch').click(function(){
+		let r = Math.floor(Math.random() * 255);
+		let g = Math.floor(Math.random() * 255);
+		let b = Math.floor(Math.random() * 255);
+		
+		$('.book2-self-icon .icon').css('background-color','rgb(' + r + ',' + g + ',' + b + ')');
+		$('.book2-self-icon .r').val(r);
+		$('.book2-self-icon .g').val(g);
+		$('.book2-self-icon .b').val(b);
+	})
+	
+	//头像颜色选择回车确认
+	$('.book2-self-icon .palette input').keydown(function(e){
+		if(e.keyCode == 13){
+			let r = $('.book2-self-icon .r').val();
+			let g = $('.book2-self-icon .g').val();
+			let b = $('.book2-self-icon .b').val();
+			if(r == '' || r < 0 || r > 255){
+				return;
+			}
+			if(g == '' || g < 0 || g > 255){
+				return;
+			}
+			if(b == '' || b < 0 || b > 255){
+				return;
+			}
+						
+			$('.book2-self-icon .icon').css('background-color','rgb(' + r + ',' + g + ',' + b + ')');
+		}
+	})
+	
+	//确认修改按钮
+	$("#choice-change2").click(function(){
+		let nickname = $('.book2-self-nickname').val();
+		let password = $('.book2-self-password').val();
+		let passwordR = $('.book2-self-password-rpt').val();
+		let r = $('.book2-self-icon .r').val();
+		let g = $('.book2-self-icon .g').val();
+		let b = $('.book2-self-icon .b').val();
+		let icon = r + ',' + g + ',' + b;
+		
+		if(password != passwordR){
+			alert('两次输入密码不相同，请检查');
+			return ;
+		}
+		
+		
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/update',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			type:'post',
+			data:{
+				nickname:nickname,
+				icon:icon,
+				password:password
+			},
+			async:false,
+			success:function(res){
+				console.log(res);
+				if(res.code == 200){
+					alert('修改成功');
+					location.reload();
+					return;
+				}else{
+					alert('修改失败:' + res.message);
+				}
+			}
+		})
+		
+	})
+    
+	$("#choice-change3").click(function(){
+		hides();
+		$(".book01").show();	
+	})
+	
+	//词典帮助点击事件
+	$('.option-help').click(function(){
+		// alert(123);
+		$('.hmask').fadeIn(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').show();
+		$('.submit-help').show();
+	})
+
+	//关闭词典帮助点击事件
+	$('.cross').click(function(){
+		// alert(123);
+		$('.hmask').fadeOut(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').hide();
+		$('.submit-help').hide();
+	})
+
+	//确认词典帮助点击事件
+	$('.submit-help').click(function(){
+		// alert(123);
+		$('.hmask').fadeOut(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').hide();
+		$('.submit-help').hide();
+	})
+
+</script>

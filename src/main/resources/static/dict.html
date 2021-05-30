@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>admin的词典</title>
+		<link rel="stylesheet" href="css/dict.css" />
+		<link rel="icon" href="img/猫爪.png">
+	</head>
+	<body  background="./img/cat.jpeg" style="background-repeat: no-repeat;background-size: 100% 100%">
+		
+		<div class="hmask" style="display: none;">
+			<div class="hmask-confirm">
+				<div class="cross">
+					X
+				</div>
+				<div class="tips tips-help">
+					<p>网页帮助：本网页是一个在线的单词查询以及积累平台，具有查询单词，构建词典（即积累单词），以及与他人互享词典等功能。在基于日常生活常用单词的范围与频率下，通过满足对日常单词的查询，积累的需求，实现对日常单词的巩固积累，从而提高自身特定语境下的英语交流能力，从而满足日常生活的需求。
+						本王网页由宣传界面，登录、注册界面，词典界面，以及个人主页构成。下面将对其涉及理念及功能进行说明：</p>
+					<p>一，注册，登录界面</p>
+					<p>1．页面说明</p>
+						<p>（1）登录，注册界面分别完成用户的登录，注册功能，同时支持对分享词典的阅读查看</p>
+					<p>2．页面帮助</p>
+						<p>（1）登录：登录时按照提示，输入已注册用户正确的的电话，密码，点击登录即可，登录后跳转词典界面，若为注册本账户，可通过注册页先完成注册</p>
+						<p>（2）注册：注册时，按照提示，输入电话，昵称，密码，并确认密码，即可完成注册。</p>
+					<p>二，词典界面</p>
+					<p>1．页面说明</p>
+						<p>（1）词典界面即网页的主页面，可以在此检索词典，查看他人的词典，同时，也有机会中此看到自己的分享的词典。</p>
+					<p>2．页面帮助</p>
+						<p>（1）词典检索：本词典主要支持通过词典名称，作者名称以及二者结合的方式进行检索</p>
+						<p>（2）词典查看：通过点击词典主体实现对词典的查看。</p>
+					<p>三，个人主页</p>
+						<p>1．页面说明</p>
+						<p>（1）个人主页主要包括个人资料，我的词典，以及新建词典三个板块</p>
+						<p>2．页面帮助</p>
+						<p>（1）个人资料：通过点击个人资料进入个人资料页面，可以查看个人资料。通过页面下方的修改按钮，还能实现对个人资料的修改</p>
+						<p>（2）我的词典：通过点击我的词典进入我的词典页面，我的词典页面收藏了所有自己创建的词典，可以通过点击词典主体对词典进行浏览，点击下方的删除实现对词典的删除。</p>
+						<p>（3）新建词典：通过点击新建词典进入新建词典页面，按照提示，输入词典名字，词典继承，点击页面下方的新建词典按钮即可实现词典的建立。</p>
+					<p>--附：本网页由：李唯聪，陈哲楷，刘俊宏，陈园共同完成。由于时间匆忙，网页尚有很多不足的地方，欢迎各位发现反馈，予以指正。</p>
+				</div>
+				<button class="submit submit-help">确认</button>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<div class="first-line">
+				<a class="first-line-back" style="background:url(img/logo.png) no-repeat;background-size: 70%;border-bottom: 1px solid;background-position: 1.5rem 1rem;" href="index.html"></a>
+				<!-- <button class="first-line-createdirt">新建词典</button> -->
+				<div class="first-line-options">
+					<button class="first-line-option option-all">所有词典</button>
+					<button class="first-line-option option-help">词典帮助</button>
+					<div class="option-space"></div>
+					<button class="first-line-option option-edit" style="display: none;">编辑模式</button>
+					<button class="first-line-option option-learn">学习模式</button>
+					<div class="option-space"></div>
+					<div class="option-space"></div>
+					<button class="first-line-option option-homepage" style="display: none;">个人主页</button>
+					<button class="first-line-option option-logout" style="display: none;">退出登录</button>
+				</div>
+			</div>
+			<div class="second-line">
+				<div class="second-line-admin" >
+					<div class="second-line-admin-pic"></div>
+					<p class="second-line-admin-name">admin</p>
+
+				</div>
+			</div>
+			<div class="message">
+				<!-- <a class="message-selfpage" style="background-color: #22222240; margin-left:5rem;" href="homepage.html">个人主页</a> -->
+				<!-- <a class="message-selfpage" style="background-color: #22222240; margin-left: 12rem;" href="index.html">所有词典</a> -->
+				<!-- <a class="message-selfpage message-selfpage-edit" style="background-color: #22222240; margin-left: 10rem;display: none;" onclick="toPage('edit.html',true)">编辑模式</a> -->
+				<div class="message-title">
+					<h2 class="message-title-content">《实用工具-自编辑辞典v1.0》</h2>
+					<h4 class="message-title-content">--吉林大学2119级网页设计小组LCLC开发--</h4>
+				</div>
+			</div>
+			<div class ="book">
+				<div class="book-wrapper">
+					
+					<div class="book-info">
+						<table border="2" class="book-info-sheet book-info-show">
+							<tr>
+								<td colspan="2" class="book-info-name"></td>
+								<td rowspan="2" class="book-info-introduction" width="64%"></td>
+							</tr>
+							<tr>
+								<td class="book-info-private"></td>
+								<td class="book-info-wordcount"></td>
+							</tr>
+						</table> 
+					</div>
+					<p style="width: 100%; height: .2rem; background: rgb(18, 0, 121);margin: .5rem 0rem;"></p>
+					
+					<div class="words-input">
+					    <p class="words-input-search">查找词汇</p>
+					    <input type="text" class="words-input-english" placeholder="输入单词或词组"/>
+					    <input type="text" class="words-input-short" placeholder="输入缩写"/>
+					    <input type="text" class="words-input-china" placeholder="输入单词释义"/>
+					</div>
+					<p style="width: 100%; height: .2rem; background: rgb(18, 0, 121);"></p>
+					
+					<div class="book-wrapper" id="sheet-words">
+						
+					</div>
+				</div>
+				<div class="book-learn" style="display: none;">
+					<div class="book-learn-card"></div>
+					<button class="book-learn-next book-learn-button">下一个</button>
+					<button class="book-learn-learned book-learn-button">会了</button>
+					<button class="book-learn-reset book-learn-button" style="display: none;">重置</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	
+	function toPage(href,flag = false){
+		document.location.href = href + (flag ? '?bId=' + document.location.href.split('?')[1].split('=')[1] : '');
+	}
+</script>
+<script src="commen.js"></script>
+
+<script src="jquery-3.5.1.js"></script>
+<script>
+	
+	$('.option-all').click(function(){
+			location.href = 'index.html';
+		})
+		
+	$('.option-logout').click(logout);
+	
+	//用户登出
+	function logout(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/logout',
+			type:'get',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			success:function(res){
+				if(res.code == 200){
+					alert('注销成功')
+					sessionStorage.removeItem('token');
+					location.href = 'index.html';
+				}else{
+					alert(res.message)
+				}
+			}
+		})
+	}
+
+	/*学习模式*/
+	
+	$('.option-learn').click(function(){
+		learning = !learning;
+		if(learning){
+			$('.option-learn').text('查找模式');
+			$('.book-wrapper').hide();
+			$('.book-learn').show();
+			cardInit();
+		}else{
+			$('.option-learn').text('学习模式');
+			$('.book-wrapper').show();
+			$('.book-learn').hide();
+		}
+	})
+	
+	var learning = false;
+	
+	var eng = false;
+	
+	var currWord;
+	
+	var wordIndex;
+	
+	var testList = [];
+	
+	var wordList = [];
+	
+	
+	
+	$('.book-learn-card').click(switchCard)
+	
+	$('.book-learn-next').click(nextWord);
+	
+	$('.book-learn-learned').click(learnedWord);
+	
+	$('.book-learn-reset').click(cardInit);
+	
+	function lockButton(){
+		$('.book-learn-learned').attr('disabled','disabled');
+		$('.book-learn-next').attr('disabled','disabled');
+	}
+	
+	function unlockButton(){
+		$('.book-learn-learned').removeAttr('disabled');
+		$('.book-learn-next').removeAttr('disabled');
+	}
+	
+	function switchCard(){
+		if(testList.length == 0){
+			return;
+		}
+		lockButton();
+		$('.book-learn-card').text('').animate({'width':'toggle'},function(){
+			$('.book-learn-card').text((eng ? currWord.eng : currWord.cn));
+			eng = !eng;
+		});
+		$('.book-learn-card').animate({'width':'toggle'},function(){
+			unlockButton();
+		});
+	}
+	
+	function nextWord(){
+		randomWord();
+		eng = false;
+		$('.book-learn-card').click();
+	}
+	
+	function learnedWord(){
+		testList.splice(testList.indexOf(wordIndex),1);
+		$('.book-learn-learned').text('会了(' + (wordList.length - testList.length) + '/' + wordList.length + ')')
+		
+		if(testList.length == 0){
+			lockButton();
+			$('.book-learn-card').text('【单词池子已经抽空】');
+			currWord = {
+				cn:'【单词池已经被抽空】',
+				eng:'【down】'
+			}
+			$('.book-learn-reset').show();
+			
+		}else{
+			nextWord();
+		}
+	}
+	
+	function cardInit(){
+		unlockButton();
+		$('.book-learn-reset').hide();
+		eng = false;
+		for(let i = 0;i < wordList.length;i++){
+			testList.push(i);
+		}
+		$('.book-learn-learned').text('会了(0/' + wordList.length + ')');
+		nextWord();
+	}
+	
+	function randomWord(){
+		let index = Math.floor(Math.random() * testList.length);
+		index = testList[index];
+		wordIndex = index;
+		currWord = wordList[index];
+	}
+	
+	
+	
+	/*学习模式结束*/
+
+	var index_num = 0;
+
+	//添加单词
+	var words_new = function(english="暂无单词或词组", short="暂无缩写", china="暂无单词释义"){
+		
+		var div = document.createElement("div");
+		div.setAttribute("class", "words-output");
+		div.setAttribute("id", "sheet" + index_num);
+	
+		var p1 = document.createElement("p");
+		p1.setAttribute("class", "words-output-english");
+		p1.setAttribute('title',english);
+		p1.innerHTML = english;
+	
+		var p2 = document.createElement("p");
+		p2.setAttribute("class", "words-output-short");
+		p2.setAttribute('title',short)
+		p2.innerHTML = short;
+		
+		var p3 = document.createElement("p");
+		p3.setAttribute("class", "words-output-china");
+		p3.setAttribute('title',china);
+		p3.innerHTML = china;
+	
+		var p0 = document.createElement("p");
+		p0.setAttribute("class", "words-output-delete");
+		p0.setAttribute("id", index_num++);
+		p0.innerHTML = "删除";
+	
+		div.append(p1);
+		div.append(p2);
+		div.append(p3);
+		console.log(index_num);
+	
+		$("#sheet-words").append(div);
+	}
+	
+	//字典排序
+	var sortDict = function(){
+		var originDict = $("#sheet-words").children();
+		// console.log(originDict);
+		var dict = originDict.slice(0);
+	
+		var index = [];
+		for(var i=0; i<dict.length; i++)
+			index.push(i);
+	
+		var temp;
+		for(var i=0; i<dict.length; i++){
+			for(var j=0; j<dict.length-1; j++){
+				var temp1 = dict[index[j]].childNodes[1].textContent;
+				var temp2 = dict[index[j+1]].childNodes[1].textContent;
+				if(temp1 > temp2){
+					dict[index[j+1]].after(dict[index[j]]);
+					temp = index[j];
+					index[j] = index[j+1];
+					index[j+1] = temp;
+				}
+			}
+			// console.log(dict[i]);
+			// console.log(dict[i].getAttribute("index"));
+		}
+	}
+	
+	//单词比较
+	var cmp = function(text){
+		var en = $(".words-input-english").val();
+		var sh = $(".words-input-short").val();
+		var ch = $(".words-input-china").val();
+		var flag = -1;
+		
+		if( en != "" && text.childNodes[0].textContent.indexOf(en) >= 0) { 
+			text.childNodes[0].style.backgroundColor = "#e6e605";
+			flag ++;
+		}
+		
+		if( sh != "" && text.childNodes[1].textContent.indexOf(sh) >= 0) { 
+			text.childNodes[1].style.backgroundColor = "#e6e605";
+			flag ++;
+		}
+		
+		if( ch != "" && text.childNodes[2].textContent.indexOf(ch) >= 0) { 
+			text.childNodes[2].style.backgroundColor = "#e6e605";
+			flag ++;
+		}
+	
+		return flag;
+	}
+	
+	//所有词典——回到主页
+	$('.option-all').click(function(){
+		location.href = 'index.html';
+	})
+	
+	//个人主页
+	$('.option-homepage').click(function(){
+		location.href = 'home.html';
+	})
+	
+	
+	//单词检索
+	$(".words-input-search").click(function(){
+		// alert(123);
+		sortDict();
+		var originDict = $("#sheet-words").children();
+		var dict = originDict.slice(0);
+	
+	
+		var top = null;
+		var rec = [[], [], []];
+		for(var i=0; i<dict.length; i++){
+			dict[i].childNodes[0].style.backgroundColor = "";
+			dict[i].childNodes[1].style.backgroundColor = "";
+			dict[i].childNodes[2].style.backgroundColor = "";
+			
+			var cmpt = cmp(dict[i]);
+			if(cmpt >= 0){
+				rec[cmpt].push(dict[i]);
+			}
+			else if(top == null)
+					top = dict[i];
+		}
+	
+		//这里是推荐词置顶
+		if(top == null) top = dict[dict.length-1];
+	
+		var top1 = null;
+		var top2 = null;
+		for( i in rec[0] ) {
+			if(top1 == null) top1 = rec[0][i];
+			top.before(rec[0][i]);
+		}
+		if(top1 == null) top1 = top;
+	
+		for( i in rec[1] ) {
+			if(top2 == null) top2 = rec[1][i];
+			top1.before(rec[1][i]);
+		}
+		if(top2 == null) top2 = top1;
+	
+		for( i in rec[2] ) top2.before(rec[2][i]);
+	})
+		
+	//获取词典内容
+	function getWordList(){
+		let bId = document.location.href.split('?')[1].split('=')[1];
+		console.log('当前页面单词集id为:' + bId);
+		if(!bId){
+			alert('单词集错误');
+			location.href = 'index.html';
+		}
+		$.ajax({
+			url:'http://60.205.211.19:2119/bill/getWithWord',
+			type:'GET',
+			data:{
+				bId:bId
+			},
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			success:function(res){
+				console.log(res);
+				
+				$('title').text('《' + res.data.name + '》');
+				let data = res.data.words;
+				for(let i = 0;i < data.length;i++){
+					words_new(data[i].eng,data[i].shrt,data[i].cn);
+				}
+				bill = res.data;
+				wordList = res.data.words;
+				displayBillInfo();
+			}
+		})
+	}
+	
+	$('.option-edit').click(function(){
+		location.href = 'edit.html?bId=' + document.location.href.split('?')[1].split('=')[1];
+	})
+	$('.option-logout').click(function(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/logout',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			success:function(res){
+				if(res.code == 200){
+					alert('登出成功');
+					sessionStorage.removeItem('token');
+					location.reload();
+				}
+			}
+		})
+	})
+	
+	var bill;
+	
+	//放置词典信息
+	function displayBillInfo(){
+		$('.book-info-show .book-info-name').text('《' + bill.name + '》');
+		$('.book-info-private').text(bill.createTime.split(' ')[0]);
+		$('.book-info-wordcount').text(bill.wordCount);
+		$('.book-info-show .book-info-introduction').text(bill.introduction);
+	}
+	
+	//词典帮助点击事件
+	$('.option-help').click(function(){
+		// alert(123);
+		$('.hmask').fadeIn(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').show();
+		$('.submit-help').show();
+	})
+
+	//关闭词典帮助点击事件
+	$('.cross').click(function(){
+		// alert(123);
+		$('.hmask').fadeOut(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').hide();
+		$('.submit-help').hide();
+	})
+
+	//确认词典帮助点击事件
+	$('.submit-help').click(function(){
+		// alert(123);
+		$('.hmask').fadeOut(200);
+		
+		//隐藏组件
+		$('.hmask-confirm>.tips').hide();
+		$('.hmask-confirm>.submit').hide();
+		
+		//显示对应组件
+		$('.tips-help').hide();
+		$('.submit-help').hide();
+	})
+
+	$(document).ready(function(){
+		
+		if(document.location.href.split('?').length == 1 || document.location.href.split('?')[1].split('=')[0] != 'bId'){
+			alert('未知错误');
+			location.href = 'index.html';
+		}
+		
+		//词典访问权限
+		$.ajax({
+			url:'http://60.205.211.19:2119/bill/checkPublic',
+			type:'GET',
+			data:{
+				bId:document.location.href.split('?')[1].split('=')[1]
+			},
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			async:false,
+			success:function(res){
+				console.log(res);
+				//校验用户登录
+				if(res.data){
+					
+					if(res.data){
+						$('.option-edit').show();
+					}
+				}else{
+					alert('未知错误');
+					location.href='index.html';
+				}
+			}
+		})
+		getWordList();
+		
+		//校验用户登录情况
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/loginInfo',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			async:false,
+			success:function(res){
+				// console.log(res);
+				if(res.code == 200){
+					$('.second-line-admin-name').text(res.data.nickname);
+					$('.option-homepage').show();
+					$('.option-logout').show();
+					$('.second-line-admin-pic').css('background-color','rgb(' + res.data.icon + ')');
+				}else{
+					$('.second-line-admin-pic').hide();
+					$('.second-line-admin-name').text('【未登录】');
+				}
+			}
+		})
+		
+	})
+</script>
+

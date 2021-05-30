@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>网页测试</title>
+    <script type="text/javascript" src="jquery-3.5.1.js"></script>
+    <style type="text/css">
+        .words{
+            background-color: rgb(86, 179, 255);
+        }
+
+        .words-input,
+        .words-output{
+            display: flex;
+            top: 0;
+            padding-left: 1rem;
+            margin-top: 1rem;
+            background-color: rgb(47, 144, 223);
+        }
+
+        .words-input-english,
+        .words-input-short,
+        .words-input-china{
+            overflow:hidden;
+            white-space:nowrap;
+
+            display: inline-block;
+            margin: 1rem;
+            margin-left: 3rem;
+            padding-left: .4rem;
+            padding-right: .4rem;
+            width: 15rem;
+            background-color: #6fff7b;
+        }
+        .words-input-short{
+            width: 5rem;
+        }
+        .words-input-china{
+            width: 17rem;
+        }
+
+        /* .words-input-english :-ms-input-placeholder{
+            color: #000000;
+            font-size: 27px;
+        } */
+
+
+        .words-input-search,
+        .words-output-delete{
+            display: block;
+            box-sizing: border-box;
+            border: 1px solid;
+            border-color: black;
+            padding-left: 0.5rem;
+            padding-right: 0.4rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.5rem;
+            background-color: #a0ffe7;
+            cursor:pointer;
+            transition: all 0.3s;
+        }
+
+        .words-output-delete{
+            padding-left: 1.5rem;
+            padding-right: 1.4rem;
+        }
+
+        .words-input-search:hover ,
+        .words-output-delete:hover {
+            transform: translate(0, -0.5rem);
+            box-shadow: 0rem 0rem 1.8rem rgb(255, 219, 206);
+        }
+
+        .words-output-english,
+        .words-output-short,
+        .words-output-china{
+            /* 多余字符省略号 */
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            -webkit-text-overflow:ellipsis;
+
+            display: inline-block;
+            margin: 1.1875rem;
+            margin-left: 3rem;
+            padding-left: 0.5rem;
+            padding-right: 0.4rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.5rem;
+            width: 15rem;
+            text-align: center;
+            background-color: #6fff7b;
+        }
+        .words-output-short{
+            width: 5rem;
+        }
+        .words-output-china{
+            width: 17rem;
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+    <div>
+        <p>网页内容标题</p>
+    </div>
+    <ul id="test"></ul>
+
+    <button id="btn" style="margin-left:3.5rem">添加</button>
+
+    <div class="words" id="sheet-words">
+        <div class="words-input">
+            <p class="words-input-search">查找词汇</p>
+            <input type="text" class="words-input-english" value="输入单词或词组"/>
+            <input type="text" class="words-input-short" value="输入缩写"/>
+            <input type="text" class="words-input-china" value="输入单词释义"/>
+        </div>
+        <p style="width: 100%; height: .2rem; background: rgb(18, 0, 121);"></p>
+    </div>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+
+        $("input").focus(function(){
+            this.select();
+        })
+
+        var index_num = 0;
+
+        var words_new = function(english="暂无单词或词组", short="暂无缩写", china="暂无单词释义"){
+            
+            var div = document.createElement("div");
+            div.setAttribute("class", "words-output");
+            div.setAttribute("id", "sheet" + index_num);
+
+            var p1 = document.createElement("p");
+            p1.setAttribute("class", "words-output-english");
+            p1.innerHTML = english + (99 - index_num);
+
+            var p2 = document.createElement("p");
+            p2.setAttribute("class", "words-output-short");
+            p2.innerHTML = short + index_num;
+            
+            var p3 = document.createElement("p");
+            p3.setAttribute("class", "words-output-china");
+            p3.innerHTML = china + index_num;
+
+            var p0 = document.createElement("p");
+            p0.setAttribute("class", "words-output-delete");
+            p0.setAttribute("id", index_num++);
+            p0.innerHTML = "删除";
+
+            div.append(p0);
+            div.append(p1);
+            div.append(p2);
+            div.append(p3);
+            console.log(index_num);
+
+            $("#sheet-words").append(div);
+        }
+
+        $("#btn").click(function(){
+            words_new();
+            sortDict();
+        })
+
+        var sortDict = function(){
+            var originDict = $("#sheet-words").children();
+            var dict = originDict.slice(2);
+
+            var index = [];
+            for(var i=0; i<dict.length; i++)
+                index.push(i);
+
+            var temp;
+            for(var i=0; i<dict.length; i++){
+                for(var j=0; j<dict.length-1; j++){
+                    var temp1 = dict[index[j]].childNodes[1].textContent;
+                    var temp2 = dict[index[j+1]].childNodes[1].textContent;
+                    if(temp1 > temp2){
+                        dict[index[j+1]].after(dict[index[j]]);
+                        temp = index[j];
+                        index[j] = index[j+1];
+                        index[j+1] = temp;
+                    }
+                }
+                // console.log(dict[i]);
+                // console.log(dict[i].getAttribute("index"));
+            }
+        }
+
+        var cmp = function(text){
+            var en = $(".words-input-english").val();
+            var sh = $(".words-input-short").val();
+            var ch = $(".words-input-china").val();
+            var flag = -1;
+            if( text.childNodes[1].textContent.indexOf(en) >= 0) flag ++;
+            if( text.childNodes[2].textContent.indexOf(sh) >= 0) flag ++;
+            if( text.childNodes[3].textContent.indexOf(ch) >= 0) flag ++;
+
+            return flag;
+        }
+
+        $(".words-input-search").click(function(){
+            
+            var originDict = $("#sheet-words").children();
+            var dict = originDict.slice(2);
+
+
+            var top = null;
+            var rec = [[], [], []];
+            //col是颜色，分别为1字符串匹配，2字符串匹配，3字符串匹配的颜色
+            var col = ["#D3DC63", "#C4AA13", "#FF5012"];
+            for(var i=0; i<dict.length; i++){
+                dict[i].style.backgroundColor = "#3090E0";
+                var cmpt = cmp(dict[i]);
+                if(cmpt >= 0){
+                    dict[i].style.backgroundColor = col[cmpt];
+                    rec[cmpt].push(dict[i]);
+                }
+                else if(top == null)
+                        top = dict[i];
+            }
+
+            //这里是推荐词置顶
+            if(top == null) top = dict[dict.length-1];
+
+            var top1 = null;
+            var top2 = null;
+            for( i in rec[0] ) {
+                if(top1 == null) top1 = rec[0][i];
+                top.before(rec[0][i]);
+            }
+            if(top1 == null) top1 = top;
+
+            for( i in rec[1] ) {
+                if(top2 == null) top2 = rec[1][i];
+                top1.before(rec[1][i]);
+            }
+            if(top2 == null) top2 = top1;
+
+            for( i in rec[2] ) top2.before(rec[2][i]);
+        })
+
+        $("#sheet-words").on('click','.words-output-delete',function(e){
+            var div = $("#sheet"+e.target.id);
+            div.attr("index", -1);
+            div.hide();
+        })
+    })
+</script>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.idictionary.mapper.UserMapper">
+
+	<resultMap type="user" id="userSimple">
+		<id property="id" column="u_id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="password" column="password"/>
+		<result property="phone" column="phone"/>
+		<result property="registerTime" column="register_time"/>
+		<result property="icon" column="icon"/>
+	</resultMap>
+	
+	<select id="getByPhone" resultMap="userSimple">
+		select
+			*
+		from
+			user
+		where
+			phone = #{phone}
+	</select>
+	
+	<select id="getById" resultMap="userSimple">
+		select
+			*
+		from
+			user
+		where
+			u_id = #{uId};
+	</select>
+	
+	<insert id="addUser">
+		insert into
+			user(
+				nickname,
+				password,
+				phone,
+				register_time
+			)
+		value(
+			#{user.nickname},
+			#{user.password},
+			#{user.phone},
+			#{user.registerTime}
+		)
+	</insert>
+
+
+	<select id="count" resultType="int">
+		select
+			count(u_id)
+		from	
+			user
+		where
+			`${field}` = #{value}
+	</select>
+	
+	<insert id="register">
+		insert into
+			user(
+				nickname,
+				password,
+				phone,
+				register_time,
+				icon
+			)
+		value(
+			#{user.nickname},
+			#{user.password},
+			#{user.phone},
+			#{registerTime},
+			#{user.icon}
+		)
+	</insert>
+	
+	<update id="update">
+		update
+			user
+		set
+			nickname = #{user.nickname},
+			password = #{user.password},
+			icon = #{user.icon}
+		where
+			u_id = #{user.id}
+	</update>
+	
+</mapper>

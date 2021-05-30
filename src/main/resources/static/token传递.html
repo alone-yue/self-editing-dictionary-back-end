@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>token传递</title>
+	</head>
+	<body>
+		<button id="login">点击登录</button>
+		<button id="logout">点击登出</button>
+		<button id="login-info">登录信息</button>
+		<button id="login-status">登录状态</button>
+		<button id="register">点击注册</button>
+		<button id="profile">修改信息</button>
+		<br> 电话<input type="text" maxlength="11" placeholder="您的电话" id="phone"/>
+		<br> 昵称<input type="text" placeholder="您的昵称"  id="nickname"/>
+		<br> 密码<input type="password" placeholder="您的密码" id="password" />
+		<br><br><input type="text" placeholder="要输入的内容" id="title"/><button id="search">点击搜索</button>
+		<br><ul id="result"></ul>
+	</body>
+</html>
+<script src="jquery-3.5.1.js"></script>
+<script>
+	
+	$('#profile').click(function(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/profile',
+			type:'GET',
+			data:{
+				nickname:$('#nickname').val(),
+				password:$('#password').val()
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			success:function(res){
+				if(res.code == 200){
+					alert(res.data)
+				}else{
+					alert(res.message)
+				}
+			}
+		})
+	})
+	
+	$('#login-info').click(function(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/loginInfo',
+			type:'GET',
+			xhrFields:{
+				withCredentials:true
+			},
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			success:function(res){
+				if(res.code == 200){
+					alert(res.data)
+				}else{
+					alert(res.message)
+				}
+			}
+		})
+	})
+	
+	$('#search').click(function(){
+		$.ajax({
+			url:'http://60.205.211.19:2119/subject/search',
+			data:{
+				title:$('#title').val()
+			},
+			type:'GET',
+			success:function(res){
+				// $('#result').text(JSON.stringify(res));
+				$('#result').empty();
+				var data = res.data;
+				for(var i = 0;i < data.length;i++){
+					$('#result').append(
+						$('<li></li>').text(data[i].title)
+					)
+				}
+			}
+		})
+	})
+	
+	$('#register').click(()=>{
+		// alert($('#phone').val());
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/register',
+			type:'post',
+			data:{
+				phone:$('#phone').val(),
+				password:$('#password').val(),
+				nickname:$('#nickname').val()
+			},
+			success:(res)=>{
+				if(res.code == 200){
+					alert('注册成功');
+				}else{
+					alert('注册失败：' + res.message);
+				}
+			}
+		})
+	})
+	
+	$('#login').click(()=>{
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/login',
+			data:{
+				phone:$('#phone').val(),
+				password:$('#password').val()
+			},
+			type:'POST',
+			xhrFields:{
+				withCredentials:true
+			},
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			success:(res)=>{
+				// alert(res);
+				if(res.code == 200){
+					alert("登录成功")
+				}else{
+					alert("登录失败:" + res.message);
+				}
+				sessionStorage.setItem('token',res.data);
+			}
+		})
+	})
+	
+	$('#logout').click(()=>{
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/logout',
+			xhrFields:{
+				withCredentials:true
+			},
+			type:'GET',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			success:(res)=>{
+				alert(res.message);
+			}
+		})
+	})
+	
+	$('#login-status').click(()=>{
+		$.ajax({
+			url:'http://60.205.211.19:2119/user/loginStatus',
+			type:'GET',
+			headers:{
+				Authorization:sessionStorage.getItem('token')
+			},
+			xhrFields:{
+				withCredentials:true
+			},
+			success:(res)=>{
+				alert(res.data);
+			}
+		})
+	})
+</script>
